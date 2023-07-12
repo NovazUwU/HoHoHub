@@ -1,0 +1,37 @@
+local print = clonefunction(print)
+local Old 
+Old = hookfunction(request, function(Data)
+    local Env = getfenv(2)
+    local Url = Data["Url"]
+    local getRandomString = Env["getRandomString"]
+    if getRandomString then 
+        hookfunction(getRandomString, function() return "SKID" end)
+    end  
+    if Url:find("checkkey") then 
+        return {
+            StatusMessage = "OK",
+            Success = true,
+            StatusCode = 200,
+            Body = '{"callback":"15d747d6f2781da57e84589125986753f37e6a4c38f7ddf4ad7870de1af1a3d7"}',
+            Headers = {}
+        }
+    elseif Url:find("webhook") then 
+        return {}
+    end 
+    return Old(Data)
+end)
+
+task.spawn(function()
+    local KeySys = game:GetService("CoreGui"):WaitForChild("Hoho_Key")
+    local Keyshadow = KeySys:WaitForChild("Keyshadow")
+    local Keyframe = Keyshadow:WaitForChild("Keyframe")
+    local KeyFrame = Keyframe:WaitForChild("EnteryourkeyFrame")
+    local KeyText = KeyFrame:WaitForChild("Key_Text")
+    local CheckKey = Keyframe:WaitForChild("CheckKey")
+    KeyText.Text = "k2YptbkwzQ"
+    repeat task.wait(0.5)
+        for i,v in next, getconnections(CheckKey.MouseButton1Click) do v:Fire() end
+    until not KeySys.Parent
+end)
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HohoV2/Free/BloxFruitFreeV3.lua'))()
