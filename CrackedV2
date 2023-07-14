@@ -48,4 +48,4 @@ task.spawn(function()
     until not KeySys.Parent
 end)
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HohoV2/Free/BloxFruitFreeV3.lua'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NovazUwU/HoHoHub/main/CrackedLoaderV2"))()
