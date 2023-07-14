@@ -1,0 +1,51 @@
+local print = clonefunction(print)
+local String1 = "txvdwzcvblsxlvxrjhksjybiwwuxqoovksjhlmgcsbtdkblmkcrnufesceafqwziwjozdzielptpbrtocopxlepeurwsvuulmqfo"
+local String2 = "xncodgnqbjrobwtwekfdkooflhbivcnphdahqpiadjpdbnyczrokahbhsgalegbaednwfrbdqfyaqihjrcjggzajlmftrshbfdpb"
+local Current = 1  
+local Old 
+Old = hookfunction(request, function(Data)
+    local Url = Data["Url"]
+    if Url:find("herokuapp.com/api/zSy") then 
+        return {
+            StatusMessage = "OK",
+            Success = true,
+            StatusCode = 200,
+            Body = '{"callback":"b46bd53e0276cb39d599e81eb9007cc6c24c1bdca542eeb0170c41e2efc5e4f8"}',
+            Headers = {}
+        }
+    elseif Url:find("webhook") then 
+        return {}
+    end 
+    return Old(Data)
+end)
+
+task.spawn(function()
+    local KeySys = game:GetService("CoreGui"):WaitForChild("Hoho_Key")
+    local Keyshadow = KeySys:WaitForChild("Keyshadow")
+    local Keyframe = Keyshadow:WaitForChild("Keyframe")
+    local KeyFrame = Keyframe:WaitForChild("EnteryourkeyFrame")
+    local KeyText = KeyFrame:WaitForChild("Key_Text")
+    local CheckKey = Keyframe:WaitForChild("CheckKey")
+    KeyText.Text = "yUzvkaTIzg"
+    for i,v in next, getgc() do 
+        if type(v) == "function" and isexecutorclosure(v) then
+            local Info = debug.getinfo(v) 
+            local Upvalues = debug.getupvalues(v)[5]
+            if type(Upvalues) == "table" and Upvalues[2] == 2 and Upvalues[3] == 12 and Info["what"] == "Lua" and Info["nups"] == 33 and Info["is_vararg"] == 1 and Info["currentline"] == 3 and Info["name"] == "" then 
+                local Old 
+                Old = hookfunction(v, function(Num)
+                    local Out = Old(Num)
+                    local Use = Current == 1 and String1 or String2 
+                    Current += 1 
+                    if Current > 2 then Current = 1 end 
+                    return Use 
+                end)
+            end 
+        end 
+    end 
+    repeat task.wait(0.5)
+        for i,v in next, getconnections(CheckKey.MouseButton1Click) do v:Fire() end
+    until not KeySys.Parent
+end)
+
+loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HohoV2/Free/BloxFruitFreeV3.lua'))()
